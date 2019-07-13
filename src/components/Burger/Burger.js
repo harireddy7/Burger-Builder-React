@@ -9,12 +9,14 @@ const Burger = (props) => {
         return [...Array(props.ingredients[ig])].map((_, indx) => {
             return <BurgerIngredient key={ig + indx} type={ig} />
         });
-    });
+    }).reduce((prevArr, currArr) => {
+        return prevArr.concat(currArr);
+    }, []);
 
     return (
         <div className="Burger">
             <BurgerIngredient type="bread-top" />
-            {ingredientComponents}
+            {ingredientComponents.length === 0 ? <p>Please add ingredients!</p> : ingredientComponents}
             <BurgerIngredient type="bread-bottom" />
         </div>
     );
